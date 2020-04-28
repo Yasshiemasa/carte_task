@@ -1,7 +1,4 @@
-
- 
- 
- textarea{
+/* textarea{
 margin:0px; 
 padding:0px;
 font-size:15px;
@@ -23,3 +20,11 @@ margin:0 0 0 30px;
 .number{
 margin: 0  0  30 0px;
  }
+
+  */
+  form {
+      float:right;
+  }
+  .panel_1 {
+      margin-right: 0px;
+  }

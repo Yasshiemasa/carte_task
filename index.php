@@ -68,9 +68,19 @@ if (!empty($_POST)) {
     //病棟が空の場合
     if($_POST['comment4'] === '') {
     $error['comment4'] = 'blank';
+    //エラーがなければ進む
+    if (empty($error)) {
+        $_SESSION['join'] = $_POST;
+        header('Location: check.php');
+        exit();
     }
+  }
 }
 
+if ($_REQUEST['action'] == 'rewrite' && isset(
+    $_SESSION['join'])) {
+        $_POST = $_SESSION['join'];
+    }
 
 
 ?>
@@ -86,77 +96,77 @@ if (!empty($_POST)) {
 <section id="box" class="site-width">
 <h1 class="title">看護記録</h1>
 <form action="" method="post" enctype="multipart/form-data">
-    <div>
-        <lavel>氏名<input type="text" name="name" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>">様</lavel>
+<section> 
+    <div class="find">
+    <label>No<input type="text" name="id" class="format" value="<?php print(htmlspecialchars($_POST['id'], ENT_QUOTES)); ?>"></label>
+        <?php if ($error['id'] === 'blank'): ?>
+        <p class="error">* Noを入力して下さい</p>
+        <?php endif; ?>
+
+        <lavel>氏名<input type="text" name="name" class="format" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>">様</lavel>
         <?php if ($error['name'] === 'blank'): ?>
         <p class="error">* 名前を入力して下さい</p>
         <?php endif; ?>
-    </div>
-        <lavel><input type="text" name="age" value="<?php print(htmlspecialchars($_POST['age'], ENT_QUOTES)); ?>">才</lavel>
+    
+    
+        <lavel><input type="text" name="age" class="format" value="<?php print(htmlspecialchars($_POST['age'], ENT_QUOTES)); ?>">才</lavel>
         <?php if ($error['age'] === 'blank'): ?>
         <p class="error">* 年齢を入力して下さい</p>
         <?php endif; ?>
-    </div>
-        <lavel><input type="radio" name="gender" value="1" value="<?php print(htmlspecialchars($_POST['gender'], ENT_QUOTES)); ?>">男
+    
+    
+        <lavel><input type="radio" name="gender" class="format" value="1" value="<?php print(htmlspecialchars($_POST['gender'], ENT_QUOTES)); ?>">男
         <input type="radio" name="gender" value="2" value="<?php print(htmlspecialchars($_POST['gender'], ENT_QUOTES)); ?>">女</lavel>
         <?php if ($error['gender'] === 'blank'): ?>
         <p class="error">* 性別を入力して下さい</p>
         <?php endif; ?>
-    </div>
-    <div>
-        <label><input type="text" name="ward" value="<?php print(htmlspecialchars($_POST['ward'], ENT_QUOTES)); ?>">病棟</label>
+
+        <label><input type="text" name="ward" class="format" value="<?php print(htmlspecialchars($_POST['ward'], ENT_QUOTES)); ?>">病棟</label>
         <?php if ($error['ward'] === 'blank'): ?>
         <p class="error">* 病棟を入力して下さい</p>
         <?php endif; ?>
-    </div>
-    <div>
-        <label><input type="text" name="room" value="<?php print(htmlspecialchars($_POST['room'], ENT_QUOTES)); ?>">号室</label>
+    
+        <label><input type="text" name="room" class="format" value="<?php print(htmlspecialchars($_POST['room'], ENT_QUOTES)); ?>">号室</label>
         <?php if ($error['room'] === 'blank'): ?>
-        <p class="error">* 病棟を入力して下さい</p>
+        <p class="error">* 号室を入力して下さい</p>
         <?php endif; ?>
-    </div>
-    <div>
-        <label>No<input type="text" name="id" value="<?php print(htmlspecialchars($_POST['id'], ENT_QUOTES)); ?>"></label>
-        <?php if ($error['id'] === 'blank'): ?>
-        <p class="error">* 病棟を入力して下さい</p>
-        <?php endif; ?>
-    </div>
-    <div>
-        <textarea cols="10" rows="100"  placeholder="月/日 時間"   name="comment1" class="panel" value=
-        "<?php print(htmlspecialchars($_POST['comment1'], ENT_QUOTES)); ?>">
-        <?php if ($error['comment1'] === 'blank'): ?>
-        <p class="error">* 病棟を入力して下さい</p>
-        <?php endif; ?>
-        </textarea>
-    </div>
-    <div>
-        <textarea  cols="40" rows="100"    placeholder="看護処置"　name="comment2"  class="panel" value=
-        "<?php print(htmlspecialchars($_POST['comment2'], ENT_QUOTES)); ?>">
-        <?php if ($error['comment2'] === 'blank'): ?>
-        <p class="error">* 病棟を入力して下さい</p>
-        <?php endif; ?>
-        </textarea>
-    </div>
-    <div>
-    <textarea  cols="80" rows="100" name="comment3"　placeholder="記事" class="panel" value=
-        "<?php print(htmlspecialchars($_POST['comment3'], ENT_QUOTES)); ?>">
-        <?php if ($error['comment3'] === 'blank'): ?>
-        <p class="error">* 病棟を入力して下さい</p>
-        <?php endif; ?>
-        </textarea>
-    </div>
-    <div>
-        <textarea cols="10" rows="100" name="comment4" placeholder="看護師サイン" class="panel" value=
-        "<?php print(htmlspecialchars($_POST['comment4'], ENT_QUOTES)); ?>">
-        <?php if ($error['comment3'] === 'blank'): ?>
-        <p class="error">* 病棟を入力して下さい</p>
-        <?php endif; ?>
-    </textarea>
-    </div>
-    </div>   
-</form>
-
+   
+    </div> 
 </section>
-
+<section>    
+        <textarea cols="10" rows="100"  placeholder="月/日 時間"   name="comment1" class="panel_1" value=
+            "<?php print(htmlspecialchars($_POST['comment1'], ENT_QUOTES)); ?>">
+            <?php if ($error['comment1'] === 'blank'): ?>
+            <p class="error">* 月/日 時間を入力して下さい</p>
+            <?php endif; ?>
+        </textarea>
+   
+        <textarea  cols="40" rows="100"    placeholder="看護処置"　name="comment2"  class="panel" value=
+            "<?php print(htmlspecialchars($_POST['comment2'], ENT_QUOTES)); ?>">
+            <?php if ($error['comment2'] === 'blank'): ?>
+            <p class="error">* 看護処置を入力して下さい</p>
+            <?php endif; ?>
+        </textarea>
+   
+        <textarea  cols="80" rows="100" name="comment3"　placeholder="記事" class="panel" value=
+            "<?php print(htmlspecialchars($_POST['comment3'], ENT_QUOTES)); ?>">
+            <?php if ($error['comment3'] === 'blank'): ?>
+            <p class="error">* 記事を入力して下さい</p>
+            <?php endif; ?>
+        </textarea>
+   
+   
+        <textarea cols="10" rows="100" name="comment4" placeholder="看護師サイン" class="panel" value=
+            "<?php print(htmlspecialchars($_POST['comment4'], ENT_QUOTES)); ?>">
+            <?php if ($error['comment4'] === 'blank'): ?>
+            <p class="error">* 看護師サインを入力して下さい</p>
+            <?php endif; ?>
+        </textarea>
+</section>
+        <div>
+            <button class="btn">確定</button>
+        </div>
+</form>
+</section>
 </body>
 </html>
